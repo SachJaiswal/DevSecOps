@@ -9,7 +9,7 @@ pipeline {
           docker run --rm \
           -v $PWD:/project \
           aquasec/trivy:latest \
-          config /project/DEVSECOPS-ASSIGNMENT/terraform
+          config /project/terraform
         '''
       }
     }
@@ -18,16 +18,16 @@ pipeline {
       steps {
         sh '''
           docker run --rm \
-          -v $PWD/DEVSECOPS-ASSIGNMENT/terraform:/terraform \
+          -v $PWD/terraform:/terraform \
           -w /terraform \
           hashicorp/terraform:latest \
           init
-          
+
           docker run --rm \
-          -v $PWD/DEVSECOPS-ASSIGNMENT/terraform:/terraform \
+          -v $PWD/terraform:/terraform \
           -w /terraform \
           hashicorp/terraform:latest \
-          plan -var="project_id=devsecops-project"
+          plan
         '''
       }
     }
