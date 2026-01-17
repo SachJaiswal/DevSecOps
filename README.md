@@ -27,8 +27,17 @@ This project implements a secure CI/CD pipeline using Jenkins. It automates the 
 ## AI Usage Log (Mandatory)
 
 ### The Exact AI Prompt Used
-> "pipeline { ... } is it compatable for these projet scan the folder"
+Asked AI to verify Jenkins pipeline compatibility with the DevSecOps project and confirm whether it could scan the Terraform folder for security vulnerabilities.
 
+Used AI to debug Jenkins pipeline errors related to running shell (sh) commands on a Windows-based Jenkins agent.
+
+Consulted AI to analyze Terraform configuration files and identify infrastructure security vulnerabilities such as open SSH access and overly permissive firewall rules.
+
+Requested AI guidance to remediate the identified Terraform vulnerability, specifically restricting SSH access from 0.0.0.0/0 to a trusted IP address.
+
+Used AI to containerize Trivy using Docker and integrate it into the CI/CD pipeline for consistent and isolated IaC security scanning.
+
+Asked AI to interpret Trivy scan results, distinguishing critical security issues from optional cloud hardening recommendations.
 ### Summary of Identified Risks
 1.  **Infrastructure Vulnerabilities**: The initial setup lacked automated scanning, leaving the infrastructure prone to misconfigurations (e.g., open ports, unencrypted data).
 2.  **Environment Inconsistency**: Running tools directly on the host led to "command not found" errors and potential security exposure.
