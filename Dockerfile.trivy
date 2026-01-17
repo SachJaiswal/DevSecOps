@@ -1,0 +1,5 @@
+FROM aquasec/trivy:latest
+
+WORKDIR /scan
+
+ENTRYPOINT ["trivy"]
