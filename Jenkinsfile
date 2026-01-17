@@ -1,10 +1,12 @@
 pipeline {
-    agent any
+    agent {
+        label 'windows'
+    }
 
     stages {
         stage('Terraform Security Scan') {
             steps {
-                sh 'trivy config terraform/'
+                bat 'trivy config terraform'
             }
         }
 
