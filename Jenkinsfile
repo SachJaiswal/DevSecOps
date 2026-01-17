@@ -1,23 +1,29 @@
 pipeline {
-    agent {
-        label 'windows'
+  agent any
+
+  stages {
+    stage('Checkout') {
+      steps {
+        git 'https://github.com/SachJaiswal/DevSecOps.git'
+      }
     }
 
-    stages {
-        stage('Terraform Security Scan') {
-            steps {
-                bat 'trivy config terraform'
-            }
-        }
-
-        stage('Terraform Plan') {
-            steps {
-                bat '''
-                cd terraform
-                terraform init
-                terraform plan -var="project_id=zippy-vigil-453906-u5"
-                '''
-            }
-        }
+    stage('Terraform Security Scan') {
+      steps {
+        sh '''
+          docker run --rm -v $(pwd):/project aquasec/trivy config /project/terraform
+        '''
+      }
     }
+
+    stage('Terraform Plan') {
+      steps {
+        sh '''
+          cd terraform
+          terraform init
+          terraform plan
+        '''
+      }
+    }
+  }
 }
