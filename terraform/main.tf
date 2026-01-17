@@ -23,9 +23,9 @@ resource "google_compute_instance" "vm" {
   tags = ["web"]
 }
 
-# ❌ INTENTIONAL SECURITY VULNERABILITY
-resource "google_compute_firewall" "open_ssh" {
-  name    = "open-ssh-firewall"
+# ✅ SECURE SSH FIREWALL RULE (FIXED)
+resource "google_compute_firewall" "secure_ssh" {
+  name    = "secure-ssh-firewall"
   network = "default"
 
   allow {
@@ -33,6 +33,8 @@ resource "google_compute_firewall" "open_ssh" {
     ports    = ["22"]
   }
 
-  source_ranges = ["0.0.0.0/0"]  # ❌ insecure on purpose
-  target_tags   = ["web"]
+  # SSH allowed ONLY from trusted IP
+  source_ranges = ["103.226.145.64/32"]
+
+  target_tags = ["web"]
 }
