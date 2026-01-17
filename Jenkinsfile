@@ -3,17 +3,20 @@ pipeline {
 
   stages {
 
-    stage('Terraform Security Scan') {
-      steps {
-        sh '''
-          docker run --rm \
-          --volumes-from jenkins \
-          aquasec/trivy:latest \
-          config --exit-code 1 \
-          /var/jenkins_home/workspace/devsecops-pipeline/terraform
-        '''
-      }
-    }
+   stage('Terraform Security Scan') {
+  steps {
+    sh '''
+      docker run --rm \
+      --volumes-from jenkins \
+      aquasec/trivy:latest \
+      config \
+      --severity HIGH,CRITICAL \
+      --format table \
+      --exit-code 1 \
+      /var/jenkins_home/workspace/devsecops-pipeline/terraform
+    '''
+  }
+}
 
     stage('Terraform Plan') {
       steps {
