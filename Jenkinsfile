@@ -10,7 +10,7 @@ pipeline {
 
         stage('Terraform Plan') {
             steps {
-                sh '''
+                bat '''
                 cd terraform
                 terraform init
                 terraform plan -var="project_id=zippy-vigil-453906-u5"
