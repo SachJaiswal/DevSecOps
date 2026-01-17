@@ -18,10 +18,11 @@ This project implements a secure CI/CD pipeline using Jenkins. It automates the 
 ## Before & After Security Report
 
 ### Initial Failing Jenkins Scan
-> *[Insert screenshot of the initial failing Jenkins scan or Trivy report here]*
+<img width="1852" height="1078" alt="image" src="https://github.com/user-attachments/assets/f1758b28-5ca5-4173-893d-8cdf52c76409" />
 
 ### Final Passing Jenkins Scan
-> *[Insert screenshot of the final passing Jenkins scan here]*
+<img width="647" height="510" alt="image" src="https://github.com/user-attachments/assets/661a730e-fe08-487d-82a4-47796654debf" />
+
 
 ## AI Usage Log (Mandatory)
 
