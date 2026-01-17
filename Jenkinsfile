@@ -2,12 +2,6 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/SachJaiswal/DevSecOps.git'
-            }
-        }
-
         stage('Terraform Security Scan') {
             steps {
                 sh 'trivy config terraform/'
