@@ -15,6 +15,9 @@ This project implements a secure CI/CD pipeline using Jenkins. It automates the 
 *   **Trivy**: Security scanner for containers and IaC.
 *   **Node.js**: Application backend.
 
+<img width="689" height="335" alt="image" src="https://github.com/user-attachments/assets/c991ffb7-f153-4873-a09b-bc3b76d212f9" />
+<img width="472" height="317" alt="image" src="https://github.com/user-attachments/assets/abfeebad-9850-4238-b6f6-681b4064520f" />
+
 ## Before & After Security Report
 
 ### Initial Failing Jenkins Scan
