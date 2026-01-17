@@ -9,13 +9,10 @@ pipeline {
                 echo "Workspace contents:"
                 ls -la
 
-                echo "Terraform directory contents:"
-                ls -la terraform
-
                 docker run --rm \
                   -v $(pwd):/project \
                   aquasec/trivy:latest \
-                  config /project/terraform || true
+                  config /project || true
                 '''
             }
         }
