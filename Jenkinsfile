@@ -3,14 +3,24 @@ pipeline {
 
   stages {
     stage('Terraform Security Scan') {
+      agent {
+        docker {
+          image 'aquasec/trivy:latest'
+          args '--entrypoint=""'
+        }
+      }
       steps {
-        sh '''
-          docker run --rm -v $(pwd):/project aquasec/trivy config /project/terraform
-        '''
+        sh 'trivy config terraform'
       }
     }
 
     stage('Terraform Plan') {
+      agent {
+        docker {
+          image 'hashicorp/terraform:latest'
+          args '--entrypoint=""'
+        }
+      }
       steps {
         sh '''
           cd terraform
