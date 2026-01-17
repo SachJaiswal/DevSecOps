@@ -7,9 +7,10 @@ pipeline {
       steps {
         sh '''
           docker run --rm \
-          -v $PWD/terraform:/terraform \
+          --volumes-from jenkins \
           aquasec/trivy:latest \
-          config --exit-code 1 /terraform
+          config --exit-code 1 \
+          /var/jenkins_home/workspace/devsecops-pipeline/terraform
         '''
       }
     }
@@ -18,14 +19,14 @@ pipeline {
       steps {
         sh '''
           docker run --rm \
-          -v $PWD/terraform:/terraform \
-          -w /terraform \
+          --volumes-from jenkins \
+          -w /var/jenkins_home/workspace/devsecops-pipeline/terraform \
           hashicorp/terraform:latest \
           init
 
           docker run --rm \
-          -v $PWD/terraform:/terraform \
-          -w /terraform \
+          --volumes-from jenkins \
+          -w /var/jenkins_home/workspace/devsecops-pipeline/terraform \
           hashicorp/terraform:latest \
           plan
         '''
