@@ -4,29 +4,30 @@ pipeline {
   stages {
 
     stage('Terraform Security Scan') {
-      agent {
-        docker {
-          image 'aquasec/trivy:latest'
-          args '--entrypoint=""'
-        }
-      }
       steps {
-        sh 'trivy config DEVSECOPS-ASSIGNMENT/terraform'
+        sh '''
+          docker run --rm \
+          -v $PWD:/project \
+          aquasec/trivy:latest \
+          config /project/DEVSECOPS-ASSIGNMENT/terraform
+        '''
       }
     }
 
     stage('Terraform Plan') {
-      agent {
-        docker {
-          image 'hashicorp/terraform:latest'
-          args '--entrypoint=""'
-        }
-      }
       steps {
         sh '''
-          cd DEVSECOPS-ASSIGNMENT/terraform
-          terraform init
-          terraform plan -var="project_id=devsecops-project"
+          docker run --rm \
+          -v $PWD/DEVSECOPS-ASSIGNMENT/terraform:/terraform \
+          -w /terraform \
+          hashicorp/terraform:latest \
+          init
+          
+          docker run --rm \
+          -v $PWD/DEVSECOPS-ASSIGNMENT/terraform:/terraform \
+          -w /terraform \
+          hashicorp/terraform:latest \
+          plan -var="project_id=devsecops-project"
         '''
       }
     }
